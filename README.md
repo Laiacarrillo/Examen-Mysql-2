@@ -4,9 +4,18 @@
 
 Este proyecto tiene como objetivo la implementación de consultas SQL, funciones, triggers y eventos en una base de datos de alquiler de películas. Se utilizará el sistema Sakila como base para las tareas y consultas. Las actividades incluyen el análisis de datos de alquileres, la implementación de funcionalidades para gestionar clientes y películas, y la automatización de tareas periódicas.
 
+## Estructura del Repositorio
+
+- `/Consultas_SQL`: Contiene las consultas SQL requeridas.
+- `/Funciones_SQL`: Contiene las funciones SQL.
+- `/Triggers`: Contiene los triggers SQL.
+- `/Eventos`: Contiene los eventos SQL.
+- `/Documentación`: Contiene este archivo y otros documentos relacionados.
+
 ### Requerimientos
 - Base de Datos: El sistema debe utilizar la base de datos Sakila.
 - Entorno de Ejecución: Se debe ejecutar sobre un servidor SQL compatible con la sintaxis estándar de MySQL (o similar).
+
 ### Objetivos:
 - Consultas para obtener información sobre clientes, películas, alquileres y categorías.
 - Funciones para calcular ingresos, duraciones y descuentos.
@@ -63,6 +72,10 @@ Se deben crear los siguientes eventos para automatizar tareas periódicas:
 - LimpiarAuditoriaCada6Meses: Borra los registros antiguos de auditoría cada seis meses.
 - ActualizarCategoriasPopulares: Actualiza la lista de categorías más alquiladas al final de cada mes.
 
+
+## Autor
+
+Laia Carrillo
 
 Este README describe el objetivo y las tareas del proyecto. Asegúrate de cumplir con todos los requisitos y realizar las tareas de acuerdo a las especificaciones de la base de datos Sakila.
 
