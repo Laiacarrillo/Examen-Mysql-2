@@ -11,7 +11,7 @@ BEGIN
         CURDATE(),
         COUNT(*),
         SUM(CASE WHEN Estado = 'Finalizado' THEN CostoAlquiler ELSE 0 END)
-    FROM Alquileres
+    FROM alquileres
     WHERE FechaAlquiler BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();
 END;
 
@@ -23,9 +23,9 @@ ON SCHEDULE EVERY 1 MONTH
 STARTS '2025-03-31 23:59:59'
 DO
 BEGIN
-    UPDATE Clientes
+    UPDATE clientes
     SET SaldoPendiente = (
-        SELECT SUM(Saldo) FROM Alquileres WHERE ClienteID = Clientes.ClienteID AND Estado = 'Pendiente'
+        SELECT SUM(Saldo) FROM Alquileres WHERE id_cliente = clientes.id_cliente AND Estado = 'Pendiente'
     );
 END;
 
@@ -39,12 +39,12 @@ BEGIN
     DECLARE finished INT DEFAULT 0;
 
     DECLARE movie_cursor CURSOR FOR
-        SELECT PeliculaID
-        FROM Peliculas
+        SELECT id_pelicula
+        FROM pelicula
         WHERE NOT EXISTS (
-            SELECT 1 FROM Alquileres
-            WHERE Alquileres.PeliculaID = Peliculas.PeliculaID 
-            AND Alquileres.FechaAlquiler > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+            SELECT 1 FROM alquileres
+            WHERE alquileres.id_pelicula = peliculas.id_pelicula
+            AND alquileres.FechaAlquiler > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
         );
 
     OPEN movie_cursor;
@@ -77,8 +77,6 @@ END;
 -- 5. Evento: ActualizarCategoriasPopulares
 -- Actualiza la lista de categorías más alquiladas al final de cada mes.
 
-sql
-Copiar
 CREATE EVENT ActualizarCategoriasPopulares
 ON SCHEDULE EVERY 1 MONTH
 STARTS '2025-03-31 23:59:59'
@@ -86,12 +84,12 @@ DO
 BEGIN
     TRUNCATE TABLE CategoriasPopulares; 
 
-    INSERT INTO CategoriasPopulares (CategoriaID, TotalAlquileres)
-    SELECT p.CategoriaID, COUNT(a.AlquilerID) AS TotalAlquileres
-    FROM Alquileres a
-    JOIN Peliculas p ON a.PeliculaID = p.PeliculaID
+    INSERT INTO CategoriasPopulares (id_categoria, TotalAlquileres)
+    SELECT p.id_categoria, COUNT(a.id_alquiler) AS TotalAlquileres
+    FROM alquileres a
+    JOIN peliculas p ON a.id_pelicula = id_pelicula
     WHERE a.FechaAlquiler BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
-    GROUP BY p.CategoriaID
+    GROUP BY p.id_categoria
     ORDER BY TotalAlquileres DESC
     LIMIT 10; 
 END;
