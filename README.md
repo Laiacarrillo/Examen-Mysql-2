@@ -12,6 +12,29 @@ Este proyecto tiene como objetivo la implementación de consultas SQL, funciones
 - `/Eventos`: Contiene los eventos SQL.
 - `/Documentación`: Contiene este archivo y otros documentos relacionados.
 
+## Instalación y Configuración
+Para implementar la base de datos, sigue estos pasos:
+1. Clona el repositorio desde GitHub:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+2. Abre MySQL Workbench o tu herramienta preferida.
+3. Ejecuta el script `ddl.sql` para crear la estructura de la base de datos:
+   ```sql
+   SOURCE ddl.sql;
+   ```
+4. Carga los datos iniciales ejecutando `dml.sql`:
+   ```sql
+   SOURCE dml.sql;
+   ```
+5. Ejecuta los diferentes scripts SQL según sea necesario:
+   - Consultas: `dql_select.sql`
+   - Procedimientos almacenados: `dql_procedimientos.sql`
+   - Funciones: `dql_funciones.sql`
+   - Triggers: `dql_triggers.sql`
+   - Eventos: `dql_eventos.sql`
+
+
 ### Requerimientos
 - Base de Datos: El sistema debe utilizar la base de datos Sakila.
 - Entorno de Ejecución: Se debe ejecutar sobre un servidor SQL compatible con la sintaxis estándar de MySQL (o similar).
@@ -72,7 +95,19 @@ Se deben crear los siguientes eventos para automatizar tareas periódicas:
 - LimpiarAuditoriaCada6Meses: Borra los registros antiguos de auditoría cada seis meses.
 - ActualizarCategoriasPopulares: Actualiza la lista de categorías más alquiladas al final de cada mes.
 
-
+## Estructura del Repositorio
+El repositorio sigue una organización clara y estructurada:
+```
+Los_Ambientales/
+│-- ddl.sql              # Creación de la base de datos y tablas
+│-- dml.sql              # Inserción de datos 
+│-- dql_select.sql       # Consultas SQL
+│-- dql_funciones.sql    # Funciones definidas en SQL
+│-- dql_triggers.sql     # Triggers
+│-- dql_eventos.sql      # Eventos programados
+│-- README.md            # Documentación del proyecto
+│-- Diagrama.jpg         # Modelo de datos
+```
 ## Autor
 
 Laia Carrillo

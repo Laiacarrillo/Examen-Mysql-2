@@ -19,7 +19,7 @@ CREATE TABLE ciudad (
 
 3--
 CREATE TABLE direccion (
-    id_direccion SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_direccion SMALLINT UNSIGNED PRIMARY KEY,
     direccion VARCHAR(50) NOT NULL,
     direccion2 VARCHAR(50),
     distrito VARCHAR(50),
@@ -46,7 +46,7 @@ CREATE TABLE cliente (
 
 5--
  CREATE TABLE empleado (
-    id_empleado TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_empleado TINYINT UNSIGNED PRIMARY KEY,
     nombre VARCHAR(45) NOT NULL,
     apellidos VARCHAR(45) NOT NULL,
     id_direccion SMALLINT UNSIGNED NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE inventario (
 );
 
 9--
-CREATE TABLE alquiler (
+CREATE TABLE alquiler(
     id_alquiler INT PRIMARY KEY AUTO_INCREMENT,
     fecha_alquiler DATETIME NOT NULL,
     id_inventario MEDIUMINT UNSIGNED NOT NULL,
